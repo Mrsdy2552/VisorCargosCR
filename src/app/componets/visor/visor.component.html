@@ -1,0 +1,28 @@
+<div class="table-wrapper-scroll-y my-custom-scrollbar mt-3">
+<table class="table table-hover table-sm"  >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID Unico</th>
+      <th scope="col">Codigo Articulo</th>
+      <th scope="col">Nombre Articulo</th>
+      <th scope="col"> Orden Medicamento</th>
+      <th scope="col"> Fecha Orden </th>
+      <th scope="col"> Cantidad Orden </th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let dato of datos.rows | paginate: { itemsPerPage: 10, currentPage: paginaActual }">
+    <tr>
+      <td>{{dato[0]}}</td>
+      <td>{{dato[2]}}</td>
+      <td>{{dato[3]}}</td>
+      <td>{{dato[4]}}- {{dato[5]}} </td>
+      <td>{{dato[6]| date:'medium'}}</td>
+      <td>{{dato[7]}}</td>
+    </tr>
+    <tr>
+
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="paginaActual = $event"  >  </pagination-controls>
+</div>

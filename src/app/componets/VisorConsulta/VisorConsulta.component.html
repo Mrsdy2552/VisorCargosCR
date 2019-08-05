@@ -1,0 +1,80 @@
+  <div class="table-wrapper-scroll-y my-custom-scrollbar mt-3" >
+   <table class="table table-hover table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID Unico</th>
+            <th scope="col">Nombre paciente</th>
+            <th scope="col">tipo identificacion</th>
+            <th scope="col"> identificacion</th>
+            <th scope="col"> codigo actividad</th>
+            <th scope="col">descripcion actividad </th>
+            <th scope="col"> fecha orden medica</th>
+            <th scope="col"> hora orden</th>
+            <th scope="col"> estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let dato of tdatos.rows | paginate: { itemsPerPage: 10, currentPage: paginaActual }">
+          <tr>
+            <td>{{dato[0]}}</td>
+            <td>{{dato[1] }}</td>
+            <td>{{dato[2]}}</td>
+            <td>{{dato[3]}}</td>
+            <td> {{dato[4]}}</td>
+            <td>{{dato[5]}} </td>
+            <td>{{dato[6]| date  }}</td> 
+            <td>{{dato[7] |date:'shortTime' }}</td> 
+            <td>{{dato[8]}}</td> 
+            <td> 
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Explorar</button>
+
+            </tr>
+       
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <!-- inicio tabla -->
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">ID Unico</th>
+                            <th scope="col">INGRESO</th>
+                            <th scope="col">COD.ACTIVIDAD</th>
+                            <th scope="col">ACTIVIDAD</th>
+                            <th scope="col">FECHA </th>
+                            <th scope="col">CANTIDAD </th>
+                            
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody *ngFor="let CONSULTA of Vdatos.rows">
+                          <tr>
+                            <td>{{CONSULTA[0]}}</td>
+                            <td>{{CONSULTA[1]}}</td>
+                            <td>{{CONSULTA[2]}}</td>
+                            <td>{{CONSULTA[3]}}</td>
+                            <td>{{CONSULTA[4] | date}}</td>
+                            <td>{{CONSULTA[5]}} </td>
+                           </tr>
+                           </tbody>
+                           </table>
+
+                    <!-- fin tabla -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+  </tbody>
+  </table>
+  
+<pagination-controls (pageChange)="paginaActual = $event"  >  </pagination-controls>
+  </div>
+  
+            
+  
+ 
+    
