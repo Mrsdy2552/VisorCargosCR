@@ -1,1 +1,48 @@
-<p>agenda-triage works!</p>
+<div class="col-sm-3">
+    <div class="form-group">
+        <label for="selectsamu">Seleccione Samu</label>
+        <select class="form-control" id="selectsamu" name="selectsamu" [(ngModel)]="selectsamu"  (change)="triage(selectsamu)">
+            <option value="01002">Samu Norte</option>
+            <option value="01003">Sur</option>
+            <option value="01001">68</option>
+        </select>
+           </div>
+</div>
+
+    <!-- 
+<div>
+    El samu es {{selectsamu}}
+
+</div> -->
+
+
+    <div class="table-wrapper-scroll-y my-custom-scrollbar mt-3">
+            <table class="table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">EPIACTFEN</th>
+                    <th scope="col">EPIACTEUR</th>
+                    <th scope="col">WPIACTUBI</th>
+                    <th scope="col">UBINOM </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let dato of agendas.rows | paginate: { itemsPerPage: 15, currentPage: paginaActual   } ; index as i ">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{dato[0]}}</td>
+                    <td>{{dato[1]}}</td>
+                    <td>{{dato[2]}}</td>
+                    <td>{{dato[3]}}</td>
+                    <td>{{dato[4]}}</td>
+                </tr>
+                <tr>
+
+            </tbody>
+        </table>
+
+
+            <pagination-controls (pageChange)="paginaActual = $event"> </pagination-controls>
+    
+    </div>

@@ -11,7 +11,7 @@ export class VisorComponent implements OnInit {
 
   datos: any = [];
   paginaActual:number = 1;
-
+ 
   constructor( private visorService: VisorService) {
 
     let now = moment(); // add this 2 of 4
@@ -37,6 +37,5 @@ export class VisorComponent implements OnInit {
  
 }
  
-
 
 }

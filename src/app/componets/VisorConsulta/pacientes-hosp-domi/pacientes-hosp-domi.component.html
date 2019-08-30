@@ -1,0 +1,40 @@
+  <!-- inicio tabla -->
+  <table class="table-bordered table-sm" id="tablaM">
+        <thead class="thead-dark">
+          <tr>
+
+            <th scope="col">Sede</th>
+            <th scope="col">ID Unico</th>
+            <th scope="col">Nombre paciente</th>
+            <th scope="col">DOC</th>
+            <th scope="col">Numero</th>
+            <th scope="col"> Fecha Nacimiento</th>
+            <th scope="col">EPS </th>
+            <th scope="col">Actividad </th>
+            <th scope="col">Fecha Hora Creacion </th>
+            <th scope="col">Estado </th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let CONSULTA of datos.rows">
+          <tr>
+
+
+            <td>{{CONSULTA[0]| slice : 23 : 32 }}</td>  
+            <td>{{CONSULTA[1]}}</td>
+            <td>{{CONSULTA[3]}}</td>
+            <td>{{CONSULTA[4]}}</td>
+            <td>{{CONSULTA[5]}}</td>
+            <td>{{CONSULTA[6] | date }} </td>
+            <td>{{CONSULTA[8]}} </td>
+            <td>{{CONSULTA[10]}}</td>
+            <td>{{CONSULTA[11]| date }}: {{CONSULTA[12] | date:'HH:m' }}
+            
+            <td>{{CONSULTA[13]}} </td>
+ 
+
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- fin tabla -->

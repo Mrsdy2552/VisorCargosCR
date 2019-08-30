@@ -1,80 +1,167 @@
-  <div class="table-wrapper-scroll-y my-custom-scrollbar mt-3" >
-   <table class="table table-hover table-sm">
+<!-- Acordeon -->
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#tReferencia" role="button" aria-expanded="false"
+    aria-controls="collapseExample">
+    Tablero Referencia
+  </a>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#hDomiciliaria"
+    aria-expanded="false" aria-controls="collapseExample">
+    hospitalización domiciliaria
+  </button>
+</p>
+<div class="collapse" id="tReferencia">
+  <div class="card card-body">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar mt-3">
+      <table class="table-bordered table-sm">
         <thead class="thead-dark">
           <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sede</th>
             <th scope="col">ID Unico</th>
             <th scope="col">Nombre paciente</th>
-            <th scope="col">tipo identificacion</th>
+            <th scope="col">T.DOC</th>
             <th scope="col"> identificacion</th>
-            <th scope="col"> codigo actividad</th>
-            <th scope="col">descripcion actividad </th>
-            <th scope="col"> fecha orden medica</th>
-            <th scope="col"> hora orden</th>
-            <th scope="col"> estado</th>
+            <th scope="col">Fecha Nacimiento</th>
+            <th scope="col">EDAD</th>
+            <th scope="col">EPS </th>
+            <th scope="col">Actividad </th>
+            <th scope="col">Fecha Hora Creacion </th>
+            <th scope="col">Estado </th>
             <th></th>
           </tr>
         </thead>
-        <tbody *ngFor="let dato of tdatos.rows | paginate: { itemsPerPage: 10, currentPage: paginaActual }">
+        <tbody
+          *ngFor="let dato of tdatos.rows | paginate: { itemsPerPage: 15, currentPage: paginaActual   } ; index as i">
           <tr>
-            <td>{{dato[0]}}</td>
-            <td>{{dato[1] }}</td>
-            <td>{{dato[2]}}</td>
+            <td>{{i+1}}</td>
+            <td>{{dato[0]| slice : 22 : 29 }}</td>
+            <td>{{dato[1]}}</td>
             <td>{{dato[3]}}</td>
-            <td> {{dato[4]}}</td>
+            <td>{{dato[4]}}</td>
             <td>{{dato[5]}} </td>
-            <td>{{dato[6]| date  }}</td> 
-            <td>{{dato[7] |date:'shortTime' }}</td> 
-            <td>{{dato[8]}}</td> 
-            <td> 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Explorar</button>
+            <td>{{dato[6]| date }}</td>
+            <td>{{dato[7] |number | slice : 0 : 2}} </td>
+            <td>{{dato[9]}} </td>
+            <td>{{dato[11]}} </td>
+            <td>{{dato[12]| date }}: {{dato[13] | date:'HH:m' }}</td>
+            <td>{{dato[14]}} </td>
+
+            <td>
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" href="#table1"
+                (click)="VCargosPendientes(dato[1],dato[2],dato[15],dato[16],dato[17])">Explorar</button>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination-controls (pageChange)="paginaActual = $event"> </pagination-controls>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+<div class="modal fade" id="table1"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" id="tcargos">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cargos pendientes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover table-sm" id="modal">
+          <thead class="thead-dark">
+            <tr>
+
+              <th scope="col"> Cedula</th>
+              <th scope="col">Nombre usuario</th>
+              <th scope="col">ID Unico</th>
+              <th scope="col">Referencia</th>
+              <th scope="col">Tipo Segimiento</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Causa de seguimiento</th>
+              <th scope="col">Fecha y hora de seguimiento</th>
+              <th scope="col">Observacion</th>
+              <th scope="col">Contacto</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Comentario</th>
 
             </tr>
-       
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <!-- inicio tabla -->
-                    <table class="table">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">ID Unico</th>
-                            <th scope="col">INGRESO</th>
-                            <th scope="col">COD.ACTIVIDAD</th>
-                            <th scope="col">ACTIVIDAD</th>
-                            <th scope="col">FECHA </th>
-                            <th scope="col">CANTIDAD </th>
-                            
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody *ngFor="let CONSULTA of Vdatos.rows">
-                          <tr>
-                            <td>{{CONSULTA[0]}}</td>
-                            <td>{{CONSULTA[1]}}</td>
-                            <td>{{CONSULTA[2]}}</td>
-                            <td>{{CONSULTA[3]}}</td>
-                            <td>{{CONSULTA[4] | date}}</td>
-                            <td>{{CONSULTA[5]}} </td>
-                           </tr>
-                           </tbody>
-                           </table>
+          </thead>
+          <tbody *ngFor="let CONSULTA of Vdatos.rows">
+            <tr>
 
-                    <!-- fin tabla -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
-                      </div>
-                  </div>
-                </div>
+
+              <td>{{CONSULTA[0]}}</td>
+              <td>{{CONSULTA[1]}}
+                {{CONSULTA[2]}}</td>
+
+              <td>{{CONSULTA[3]}}</td>
+              <td>{{CONSULTA[4]}}</td>
+              <td>{{CONSULTA[5]}}</td>
+              <td>{{CONSULTA[6]}} </td>
+              <td>{{CONSULTA[8]}} </td>
+              <td>{{CONSULTA[9] |date }} -- {{CONSULTA[10] | date:'HH:m' }}</td>
+              <td>{{CONSULTA[11]}} </td>
+              <td>{{CONSULTA[12]}} </td>
+              <td>{{CONSULTA[13]}} </td>
+             
+              <div class="boton">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                  data-target="#exampleModalCenter" (click)="enviar(CONSULTA[3],CONSULTA[5])">
+                  Comentar
+                </button>
               </div>
+            </tr>
+          </tbody>
+        </table> 
 
-  </tbody>
-  </table>
-  
-<pagination-controls (pageChange)="paginaActual = $event"  >  </pagination-controls>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
-  
-            
-  
- 
-    
+</div>
+
+
+
+<div class="collapse" id="hDomiciliaria">
+  <div class="card">
+    <div class="card-body">
+      <app-pacientes-hosp-domi>
+
+      </app-pacientes-hosp-domi>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Segimiento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-comentario [IdUnico]="IdUnico" [Tsegimiento]="Tsegimiento"></app-comentario>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
