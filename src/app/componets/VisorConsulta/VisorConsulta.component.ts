@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
 import { VisorService } from '../../services/visor.service';
- 
+import { mySql } from '../../services/mysql.service';
+
 
 
 @Component({
@@ -21,11 +22,15 @@ export class VisorConsulta implements OnInit {
   id: string;
   MOVULNUMUY: string;
   edad: number;
+  habilitar: boolean;
+  comentario: string; //comentario guardado
 
 
 
 
-  constructor(private tautori: VisorService, ) { }
+
+
+  constructor(private tautori: VisorService, private registroMsql: mySql) { }
 
   ngOnInit() {
     this.autori();
@@ -36,7 +41,7 @@ export class VisorConsulta implements OnInit {
     this.tautori.getVisorConsulta().subscribe(
       tresul => {
         this.tdatos = tresul
-       
+
 
       }
     )
@@ -59,29 +64,38 @@ export class VisorConsulta implements OnInit {
   // date(){
   //  this.edad =  this.tdatos.rows[6];
   //  console.log('esta es la edad: ',this.edad);
-   
+
   // 
-  enviar(enviar1,enviar2){
+
+  enviar(enviar1, enviar2) {
     this.IdUnico = enviar1;
     this.Tsegimiento = enviar2;
-    console.log(enviar1,enviar2);
-    // this.tdatos 
-    // var cedula = this.tdatos[3]
-    // return cedula;
-  }
-   
- 
-  }
+
+     
 
 
+    this.registroMsql.getComentario(enviar1, enviar2).subscribe(
+      res => {
+       
+        if (res[0] == null) {
+         this.habilitar = true;
+        console.log('habilitado', this.habilitar);
+        
+          return this.habilitar;
+          
+          
+        } else {
+          this.comentario = res[0].comentarioSegimiento;
+          this.habilitar = false;
+          console.log('comentario: ', this.comentario);
+          
+          //return  this.comentario,this.habilitar; 
 
-  
-
-
-
-
-
-
-
-
-
+          
+          
+          
+        }
+      }
+    );
+    }
+  } 

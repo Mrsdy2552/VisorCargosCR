@@ -63,7 +63,8 @@
 </div>
 
 
-<div class="modal fade" id="table1"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="table1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" id="tcargos">
       <div class="modal-header">
@@ -109,7 +110,7 @@
               <td>{{CONSULTA[11]}} </td>
               <td>{{CONSULTA[12]}} </td>
               <td>{{CONSULTA[13]}} </td>
-             
+
               <div class="boton">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                   data-target="#exampleModalCenter" (click)="enviar(CONSULTA[3],CONSULTA[5])">
@@ -118,7 +119,7 @@
               </div>
             </tr>
           </tbody>
-        </table> 
+        </table>
 
       </div>
       <div class="modal-footer">
@@ -150,17 +151,17 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Segimiento</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Seguimiento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <app-comentario [IdUnico]="IdUnico" [Tsegimiento]="Tsegimiento"></app-comentario>
+        <app-comentario [(comentario)]="comentario"  [(IdUnico)]="IdUnico" [(Tsegimiento)]="Tsegimiento" [(habilitar)]="habilitar">
+        </app-comentario>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
